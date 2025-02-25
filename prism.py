@@ -1,7 +1,7 @@
 import os
 import requests
 import re
-import openai
+from openai import OpenAI
 
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 REPO = os.getenv("GITHUB_REPOSITORY")
@@ -31,16 +31,21 @@ def validate_pr_title(title):
 def generate_suggested_titles(title):
     prompt = f"The PR title '{title}' doesn't follow conventional commit standards. Suggest three alternative, properly formatted titles."
 
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",  # You can switch to "gpt-4" if you want
-        messages=[
-            {"role": "system", "content": "You are an expert in writing clear and concise PR titles."},
-            {"role": "user", "content": prompt}
-        ],
-        max_tokens=100
+    client = OpenAI(
+    api_key=os.environ.get("OPENAI_API_KEY"),  
     )
 
-    suggestions = response['choices'][0]['message']['content']
+    chat_completion = client.chat.completions.create(
+        messages=[
+        {
+            "role": "user",
+            "content": f"{prompt}",
+        }
+    ],
+    model="gpt-4o",
+)
+
+    suggestions = chat_completion['choices'][0]['message']['content']
     return suggestions
 
 
