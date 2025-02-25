@@ -7,16 +7,21 @@ on:
 jobs:
   validate-pr:
     runs-on: ubuntu-latest
+
     steps:
+      # Step 1: Checkout code
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set environment variables
+      # Step 2: Build the Docker image
+      - name: Build Docker image
         run: |
-          echo "GITHUB_EVENT_PULL_REQUEST_NUMBER=${{ github.event.pull_request.number }}" >> $GITHUB_ENV
-          echo "GITHUB_REPOSITORY=${{ github.repository }}" >> $GITHUB_ENV
+          docker build -t prism-image .
 
-      - name: Validate PR title
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: python prism.py
+      # Step 3: Run Docker container and execute prism.py
+      - name: Run Docker container
+        run: |
+          docker run --rm -e GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} \
+                     -e GITHUB_EVENT_PULL_REQUEST_NUMBER=${{ github.event.pull_request.number }} \
+                     -e GITHUB_REPOSITORY=${{ github.repository }} \
+                     prism-image
