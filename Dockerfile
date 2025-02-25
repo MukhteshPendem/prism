@@ -4,8 +4,6 @@ WORKDIR /app
 
 COPY . /app/
 
-RUN pip install requests
-
-CMD ["ls", "-l", "/app"]
+RUN pip install --no-cache-dir -r requirements.txt
 
 CMD ["python", "prism.py"]
