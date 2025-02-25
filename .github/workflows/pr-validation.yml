@@ -24,4 +24,5 @@ jobs:
           docker run --rm -e GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} \
                      -e GITHUB_EVENT_PULL_REQUEST_NUMBER=${{ github.event.pull_request.number }} \
                      -e GITHUB_REPOSITORY=${{ github.repository }} \
+                     --env-file .env \
                      prism-image
