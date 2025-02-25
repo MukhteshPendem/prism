@@ -6,4 +6,6 @@ COPY . /app/
 
 RUN pip install requests
 
+CMD ["ls", "-l", "/app"]
+
 CMD ["python", "prism.py"]
