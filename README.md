@@ -33,3 +33,5 @@ with:
 - `style: format code`
 - `perf: optimize API call performance`
 - `ci: add GitHub Actions workflow`
+
+## Happy Merging
