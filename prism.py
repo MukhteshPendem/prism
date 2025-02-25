@@ -8,7 +8,6 @@ REPO = os.getenv("GITHUB_REPOSITORY")
 PR_NUMBER = os.getenv("GITHUB_EVENT_PULL_REQUEST_NUMBER")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
-openai.api_key = OPENAI_API_KEY
 
 VALID_PREFIXES = [
     "feat", "fix", "chore", "docs", "test", "refactor", "style", "perf", "ci", "build", "revert"
