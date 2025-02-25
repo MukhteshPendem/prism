@@ -1,0 +1,16 @@
+name: 'Prism PR Title Validator'
+description: 'Validates PR titles against a conventional commit format'
+author: 'MukhteshPendem'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+
+inputs:
+  github-token:
+    description: 'GitHub token to access the PR details'
+    required: true
+
+branding:
+  icon: 'check'
+  color: 'blue'
