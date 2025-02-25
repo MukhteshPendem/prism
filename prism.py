@@ -31,7 +31,7 @@ def generate_suggested_titles(title):
     prompt = f"The PR title '{title}' doesn't follow conventional commit standards. Suggest three alternative, properly formatted titles."
 
     client = OpenAI(
-    api_key=os.environ.get("OPENAI_API_KEY"),  
+    api_key=os.getenv("OPENAI_API_KEY"),  
     )
 
     chat_completion = client.chat.completions.create(
